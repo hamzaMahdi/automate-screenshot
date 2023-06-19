@@ -7,6 +7,7 @@ import time
 
 # asking for the ID
 id = input("Enter the ID: ")
+n_screenshots = input("Enter the number of screenshots: ")
 
 # determine the folder path where screenshots will be saved
 folder_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), id)
@@ -28,7 +29,7 @@ if window is None:
 counter = 1
 
 # screenshot and scroll until end
-while counter<50:
+while counter<n_screenshots:
     try:
         # take a screenshot of the specific window
         # TODO: region=(window.left, window.top, window.width, window.height)
