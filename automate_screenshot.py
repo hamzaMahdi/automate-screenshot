@@ -1,4 +1,5 @@
 import pyautogui
+import pydirectinput
 import pygetwindow as gw
 import os
 from pyautogui import scroll
@@ -43,10 +44,10 @@ while counter<50:
         # scroll down
         #window.activate()  # ensure the window is active
         #scroll(clicks=-1, _pause = False)
-        pyautogui.press('up', _pause = False, interval=0.1)
+        pydirectinput.keyDown('up')
         # wait for the scroll
         # time.sleep(0.1)
-
+        
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         break
