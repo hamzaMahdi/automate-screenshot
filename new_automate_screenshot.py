@@ -4,6 +4,8 @@ import pygetwindow as gw
 import os
 from pyautogui import scroll
 import time
+from PIL import Image
+import numpy as np
 
 # asking for the ID
 id = input("Enter the ID: ")
@@ -35,6 +37,23 @@ if target_window is None:
 # set counter for file naming
 counter = 1
 
+def crop_image(screenshot):
+    screenshot = np.array(screenshot)
+    # Convert the screenshot to a Pillow Image
+    pil_image = Image.fromarray(screenshot)
+
+    # Define the specific region coordinates within the image to crop
+    crop_left = 700  # Replace with your specific left coordinate
+    crop_top = 400   # Replace with your specific top coordinate
+    crop_width = 1200  # Replace with your specific width
+    crop_height = 1000  # Replace with your specific height
+
+    # Crop the image
+    cropped_image = pil_image.crop((crop_left, crop_top, crop_left + crop_width, crop_top + crop_height))
+
+    return cropped_image
+
+
 # screenshot and scroll until end
 while counter<=n_screenshots:
     try:
@@ -48,7 +67,9 @@ while counter<=n_screenshots:
         time.sleep(0.2)
         #TODO screenshot= pyautogui.screenshot(region=(target_window.left, target_window.top, target_window.width, target_window.height))
         screenshot = pyautogui.screenshot()
-        # save the screenshot
+
+        screenshot = crop_image(screenshot)
+        # save the screenshot 
         screenshot.save(os.path.join(folder_path, f"{id}_{counter}.png"))
         print(f'Saved {id}_{counter}.png')
 
